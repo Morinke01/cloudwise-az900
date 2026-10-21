@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f5">
+  <title>Cloudwise — AZ-900 practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#home" aria-label="Cloudwise home"><span class="brand-mark">c</span><span>cloudwise<span class="brand-dot">.</span></span></a>
+      <div class="side-label">YOUR WORKSPACE</div>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span>Overview</button>
+        <button class="nav-item" data-view="quiz"><span class="nav-icon">▤</span>Practice quiz</button>
+        <button class="nav-item" data-view="progress"><span class="nav-icon">◷</span>My readiness</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="streak-icon">✳</div><p class="streak-title">Small steps add up.</p><p class="streak-copy">A little practice today makes tomorrow's cloud concepts clearer.</p></div>
+      <div class="side-foot"><span class="status-dot"></span><span id="account-status">Your progress is saved on this device</span></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <b id="crumb">Overview</b></div><div class="top-right"><span class="unofficial"><span>✦</span> Independent study tool</span><button class="auth-button" id="auth-button" type="button">Sign in</button></div></header>
+      <section class="page" id="home-view">
+        <div class="welcome-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR AZURE LEARNING SPACE</div><h1>Make cloud concepts<br><span>click into place.</span></h1><p class="intro">Practice in short bursts, learn from every answer, and see where you’re growing.</p></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="cloud-shape"><span class="cloud-dot">✦</span></div><div class="float-card float-top">☁ <span>cloud basics</span></div><div class="float-card float-bottom"><span class="mini-bars"><i></i><i></i><i></i></span><span>getting clearer</span></div></div></div>
+        <div class="section-heading"><div><h2>Your learning snapshot</h2><p>A quick look at your practice so far.</p></div><button class="text-button" data-go="progress">View progress <span>→</span></button></div>
+        <div class="stats-grid"><article class="stat-card"><div class="stat-head"><span>Questions answered</span><span class="stat-icon lavender">▤</span></div><div class="stat-value" id="stat-answered">0</div><div class="stat-foot">Keep showing up and it adds up</div></article><article class="stat-card"><div class="stat-head"><span>Overall accuracy</span><span class="stat-icon mint">↗</span></div><div class="stat-value"><span id="stat-accuracy">—</span><small id="accuracy-suffix"></small></div><div class="stat-foot">Based on your completed answers</div></article><article class="stat-card"><div class="stat-head"><span>Topics explored</span><span class="stat-icon peach">◉</span></div><div class="stat-value"><span id="stat-topics">0</span><small> of 3</small></div><div class="stat-foot">Each topic builds your foundation</div></article></div>
+        <div class="section-heading topics-heading"><div><h2>Pick up where curiosity takes you</h2><p>Choose a topic or jump into a mixed practice round.</p></div></div>
+        <div class="topic-grid" id="topic-grid"></div>
+        <div class="bottom-note"><span class="note-mark">i</span><span>Original practice questions, organized around the <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900" target="_blank" rel="noreferrer">official AZ-900 skills outline ↗</a>.</span><button data-go="quiz">Start a mixed quiz <span>→</span></button></div>
+      </section>
+      <section class="page hidden" id="quiz-view">
+        <div class="quiz-top"><button class="back-button" data-go="home">← <span>Overview</span></button><span class="quiz-topic-chip" id="quiz-topic-label">Mixed practice</span></div>
+        <div class="quiz-layout"><div class="quiz-main"><div class="quiz-progress-line"><span id="question-count">QUESTION 1 OF 5</span><span id="question-percent">20%</span></div><div class="progress-track"><div id="quiz-progress-fill"></div></div><div class="question-card"><div class="question-kicker"><span class="question-spark">✦</span><span id="question-category">CLOUD CONCEPTS</span></div><h2 id="question-text"></h2><div class="answers" id="answers"></div><div class="explanation hidden" id="explanation"><div class="explanation-icon">✦</div><div><b id="feedback-title"></b><p id="feedback-text"></p><a id="feedback-source" class="learn-link hidden" target="_blank" rel="noreferrer">Review the official skills outline ↗</a></div></div><div class="quiz-actions"><span class="keyboard-hint">Choose the best answer</span><button class="primary-button" id="next-button" disabled>Check answer <span>→</span></button></div></div></div><aside class="quiz-aside"><div class="aside-illustration">✦</div><h3>Think it through</h3><p>Take your time. The explanation after each answer is where the learning sticks.</p><div class="aside-divider"></div><div class="aside-label">THIS ROUND</div><div class="round-topic" id="round-topic"></div></aside></div>
+      </section>
+      <section class="page hidden" id="progress-view">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR LEARNING JOURNEY</div><h1 class="progress-title">Progress looks good<br><span>from here.</span></h1><p class="intro progress-intro">Every attempt is useful information. Here's what your practice is telling you.</p>
+        <div class="readiness-card"><div><div class="readiness-label">OVERALL PRACTICE ACCURACY</div><div class="readiness-number"><span id="progress-accuracy">—</span><small id="progress-accuracy-suffix"></small></div><p id="readiness-message">Answer a few questions to see your learning snapshot.</p></div><div class="readiness-ring-wrap"><svg viewBox="0 0 120 120" class="readiness-ring"><circle class="ring-bg" cx="60" cy="60" r="49"></circle><circle class="ring-value" id="ring-value" cx="60" cy="60" r="49"></circle></svg><div class="ring-center"><span id="ring-percent">—</span><small>accuracy</small></div></div></div>
+        <div class="focus-card" id="focus-card"><div class="focus-icon">◎</div><div class="focus-copy"><div class="readiness-label">SUGGESTED NEXT FOCUS</div><h3 id="focus-title">Explore a learning area</h3><p id="focus-description">Try a short practice round to get started.</p></div><button class="primary-button" id="focus-button">Practice this area <span>→</span></button></div>
+        <div class="review-card"><div class="review-icon">↺</div><div class="review-copy"><div class="readiness-label">REVIEW QUEUE</div><h3 id="review-title">No questions to revisit</h3><p id="review-description">Questions you miss will be saved here for another try.</p></div><button class="review-button" id="review-button" disabled>Review missed questions <span>→</span></button></div>
+        <div class="section-heading progress-section-heading"><div><h2>By learning area</h2><p>Use these signals to guide your next practice session.</p></div><button class="text-button" data-go="quiz">Practice now <span>→</span></button></div><div class="readiness-topics" id="readiness-topics"></div>
+        <div class="bottom-note"><span class="note-mark">i</span><span>Practice accuracy is a learning signal, not a prediction of exam results.</span><button data-go="quiz">Keep practicing <span>→</span></button></div>
+      </section>
+      <footer class="footer"><span>Made for curious cloud learners <span class="footer-heart">✦</span></span><span>Cloudwise is an independent, unofficial study project. Not affiliated with Microsoft.</span></footer>
+    </main>
+  </div>
+  <dialog class="auth-dialog" id="auth-dialog">
+    <div class="auth-panel">
+      <button class="auth-close" id="auth-close" type="button" aria-label="Close">×</button>
+      <div class="auth-mark">↗</div>
+      <div class="eyebrow">YOUR PROGRESS, YOURS</div>
+      <h2 id="auth-panel-title">Pick up where you left off.</h2>
+      <p class="auth-intro">Use your email and password to save your quiz history and missed questions to your account.</p>
+      <form id="auth-form">
+        <label for="auth-email">Email address</label>
+        <input id="auth-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label for="auth-password">Password</label>
+        <input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+        <button class="primary-button auth-submit" id="auth-submit" type="submit">Sign in <span>→</span></button>
+      </form>
+      <button class="auth-mode-toggle" id="auth-mode-toggle" type="button">New here? Create an account</button>
+      <p class="auth-status" id="auth-status" role="status" aria-live="polite"></p>
+      <p class="auth-footnote">Your practice remains available without signing in.</p>
+    </div>
+  </dialog>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
