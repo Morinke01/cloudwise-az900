@@ -12,8 +12,10 @@ The browser integration is ready, but it needs your project credentials and data
 
 1. Create a Supabase project in your account.
 2. In the project dashboard, open **SQL Editor** and run `supabase/schema.sql`.
-3. Run `supabase/seed.sql` to import 31 original practice questions.
-4. Confirm the `questions` table contains published questions across all three AZ-900 domains.
+3. Run `supabase/seed.sql` to import 58 original practice questions.
+4. Confirm the `questions` table contains 58 published questions across all three AZ-900 domains.
+
+To update an existing project, run the latest `supabase/seed.sql` again. It upserts by question ID, so existing questions are refreshed and new questions are added without duplicating rows.
 
 The question bank is readable without signing in. Learner attempts are private to each account and are written through a database function that checks the answer. The seed questions are original practice material tied to the published skills outline; they are not copied from the exam or Microsoft's practice assessment. For Microsoft's own free example questions, use the [official AZ-900 practice assessment](https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/practice/assessment?assessment-type=practice&assessmentId=23&practice-assessment-type=certification).
 
@@ -31,7 +33,7 @@ With the project configured, the app loads the shared question bank. Learners ca
 ## Project choices
 
 - Practice questions and explanations are written for this prototype; they are not copied from the AZ-900 exam.
-- The Supabase seed bank contains 31 original questions mapped to the current published objectives. It is a useful starter set, not full coverage of every exam objective.
+- The Supabase seed bank contains 58 original questions mapped across the current published objectives. It is a useful starter set, not full coverage of every exam objective.
 - Domain names and exam weight ranges follow the [Microsoft Learn AZ-900 study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900). Check that guide for current objectives before adding more questions.
 - Scores describe practice history. They are not a pass prediction or readiness guarantee.
 - The suggested next area prioritizes domains not yet practiced, then the lowest observed accuracy. Use it as a study prompt; a small number of questions is not a reliable measure of mastery.
