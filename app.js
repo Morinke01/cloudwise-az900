@@ -78,6 +78,7 @@ async function loadQuestionsFromSupabase() {
   if (error) throw error;
   if (!data?.length) throw new Error('The published question bank is empty. Run supabase/seed.sql first.');
   questions = data.map(mapQuestion);
+  renderQuizPicker();
 }
 
 async function loadAccountProgress() {
@@ -163,6 +164,15 @@ function renderTopics() {
   document.querySelector('#stat-topics').nextElementSibling.textContent = ' of 3';
 }
 
+function renderQuizPicker() {
+  const grid = document.querySelector('#quiz-picker-grid');
+  grid.innerHTML = topics.map(topic => {
+    const count = questions.filter(question => question.topic === topic.id).length;
+    return `<button class="quiz-picker-card" type="button" data-start-quiz="${topic.id}"><span class="picker-icon" style="background:${topic.tone}">${topic.icon}</span><span class="picker-card-copy"><b>${topic.name}</b><small>${count} practice questions · ${topic.weight} of exam</small></span><span class="picker-arrow">→</span></button>`;
+  }).join('');
+  grid.querySelectorAll('[data-start-quiz]').forEach(button => button.addEventListener('click', () => startQuiz(button.dataset.startQuiz)));
+}
+
 function renderReadiness() {
   const total = topics.reduce((sum, topic) => sum + topicStats(topic.id).total, 0);
   const correct = topics.reduce((sum, topic) => sum + topicStats(topic.id).correct, 0);
@@ -225,6 +235,8 @@ function startQuiz(topicId = 'mixed') {
   }
   questionIndex = 0;
   sessionCorrect = 0;
+  document.querySelector('#quiz-picker').classList.add('hidden');
+  document.querySelector('#quiz-layout').classList.remove('hidden');
   document.querySelector('#quiz-topic-label').textContent = topicId === 'review' ? 'Missed question review' : topicId === 'mixed' ? 'Mixed practice' : topics.find(topic => topic.id === topicId).short;
   document.querySelector('#round-topic').innerHTML = topics.map(topic => `<div><span>${topic.short}</span><b>${topicId === 'mixed' || currentSet.some(question => question.topic === topic.id) ? 'Included' : '—'}</b></div>`).join('');
   setView('quiz');
@@ -334,9 +346,10 @@ function restoreQuizMain() {
 }
 
 function navigate(view) {
-  if (view === 'quiz' && !document.querySelector('#question-count')) {
-    startQuiz('mixed');
-    return;
+  if (view === 'quiz' && !currentSet.length) {
+    renderQuizPicker();
+    document.querySelector('#quiz-picker').classList.remove('hidden');
+    document.querySelector('#quiz-layout').classList.add('hidden');
   }
   setView(view);
 }
@@ -404,6 +417,8 @@ document.querySelector('#auth-form').addEventListener('submit', async event => {
 });
 document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => navigate(button.dataset.view)));
 document.querySelectorAll('[data-go]').forEach(button => button.addEventListener('click', () => navigate(button.dataset.go)));
+document.querySelectorAll('[data-start-quiz="mixed"]').forEach(button => button.addEventListener('click', () => startQuiz('mixed')));
 document.querySelector('#next-button').addEventListener('click', nextQuestion);
 renderTopics();
+renderQuizPicker();
 initializeSupabase();
