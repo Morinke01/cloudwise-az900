@@ -14,6 +14,17 @@ Cloudwise is an independent, unofficial AZ-900 study app built to make practice 
 
 Serve the folder over HTTP; Supabase sign-in does not work from a `file://` URL. For example, run `python3 -m http.server 8000` in this directory, then open `http://localhost:8000`. If using a different local server address, allow that URL in Supabase Auth's redirect URL list. Without Supabase configured, the app uses its local starter questions and browser-only progress.
 
+## Deploy to Netlify
+
+Connect the GitHub repository to Netlify and configure:
+
+- Branch: `main`
+- Base directory: leave blank
+- Build command: `node scripts/build.mjs`
+- Publish directory: `dist`
+
+Add `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` as Netlify environment variables before deploying. The build writes these browser-required values into the generated site config; the publishable key is visible to site visitors by design. Never use a database password, `service_role` key, or secret key here. After the first deploy, add the Netlify site URL to Supabase Auth's redirect URL allow-list and set it as the Site URL.
+
 ## Supabase setup
 
 The browser integration uses Supabase Auth and Postgres. To configure a project:
