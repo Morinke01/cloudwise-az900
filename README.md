@@ -2,6 +2,8 @@
 
 Cloudwise is an independent, unofficial AZ-900 study app built to make practice more useful for beginners. It pairs original, topic-based questions with immediate explanations and an account-linked readiness tracker.
 
+**Live demo:** [cloudwise-az900.netlify.app](https://cloudwise-az900.netlify.app/)
+
 ## What it does
 
 - Offers 58 original practice questions across the three AZ-900 skill domains, aligned to the public Microsoft Learn study guide.
